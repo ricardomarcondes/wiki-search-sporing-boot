@@ -1,4 +1,4 @@
-# wiki-search-sporing-boot
+# wiki-search-spring-boot
 
 Problem:
 1. Write a tool which would ask user to input a query, take command line input from user, then search Wikipedia for this query and present user with titles and links to 3 most relevant articles.
