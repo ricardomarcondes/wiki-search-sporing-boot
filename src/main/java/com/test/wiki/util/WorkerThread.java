@@ -4,6 +4,7 @@ import java.util.concurrent.Callable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ public class WorkerThread implements Callable<WikiResponse> {
     private static final Logger LOGGER = LoggerFactory.getLogger(WorkerThread.class);
 
     private String query;
+    
+    @Autowired
     private Utils utils;
 
     public WorkerThread(String query) {
@@ -33,7 +36,7 @@ public class WorkerThread implements Callable<WikiResponse> {
     //Uses utility class to call wikipedia api
     private WikiResponse doWork(String query) {
     	LOGGER.debug("Thread started [" + query + "]");
-    	utils = new Utils();
+    	//utils = new Utils();
     	
     	//TODO Handle term => encode.url etc....
     	WikiResponse wikiResponse = new WikiResponse();
