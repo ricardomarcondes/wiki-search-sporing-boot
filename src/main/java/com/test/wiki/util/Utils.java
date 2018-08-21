@@ -1,20 +1,13 @@
 package com.test.wiki.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -103,64 +96,5 @@ public class Utils {
 		  
 		  return wikiResponse;
 	   }
-
-	/*
-	String wiki = restTemplate.getForObject(
-					"http://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=Brazil&format=json&gsrprop=snippet&prop=info&inprop=url&gsrlimit=3",
-					String.class);  
-	 */
-	
-	//Call the wiki webservice
-	public WikiResponse searchWikiOld(String query){
-		  	
-		WikiResponse wikiResponse = new WikiResponse();
-		
-		//removes non-alphanumeric characters from a Java String.
-		query = query.replaceAll("[^a-zA-Z0-9]", "");
-		
-		if(null == query || query.isEmpty() ) {
-			return wikiResponse;
-		}
-		
-		
-		try {
-	
-			StringBuffer jsonString = new StringBuffer();
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpGet getRequest = new HttpGet(urlPrefix  + query + urlSufix);
-			getRequest.addHeader("accept", "application/json");
-	
-			HttpResponse response = httpClient.execute(getRequest);
-	
-			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-	
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(response.getEntity().getContent())));
-	
-			String output;
-			while ((output = br.readLine()) != null) {
-				jsonString.append(output);
-			}
-	
-			httpClient.getConnectionManager().shutdown();
-			
-			wikiResponse = parseResponse(query, jsonString.toString());
-	
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		} catch (Exception e) {
-			//e.printStackTrace();
-		} finally {
-			return wikiResponse;
-		}
-		
-	}   	
 
 }
