@@ -14,7 +14,7 @@ Instructions:
 2. Open terminal and change to dir where pom.xml is located
 3. Run the command: mvn clean install
 4. Run the command: mvn spring-boot:run
-5. In the browser paste this url: http://localhost:8080/wikisearch/multi?query=Toronto&query=Trump&query=Brazil&query=EU&query=USA&query=Apple&query=Microsoft&query=Ontario
+5. In the browser paste this url: http://localhost:8081/wikisearch/multi?query=Toronto&query=Trump&query=Brazil&query=EU&query=USA&query=Apple&query=Microsoft&query=Ontario
 6. Verify the wiki search results.
 
 
